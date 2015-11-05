@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class="reminders">
+  {% for reminder in reminders %}
+    <li><h2><form action="{{ url_for('delete_reminder') }}" method="POST" style="margin: 0; padding: 0;">
+      <input type="hidden" value="{{ reminder.id }}" name="reminder_id">
+      <input type="submit" value="Delete">
+      {{ reminder.email }}</h2>
+      {{ reminder.text|safe }}
+    </form>
+  {% else %}
+    <li><em>Unbelievable.  No reminders here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

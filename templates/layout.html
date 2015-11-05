@@ -1,0 +1,26 @@
+<!doctype html>
+<title>Email Reminder</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="page">
+  <h1>Email Reminder</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endwith %}
+
+  <p>Manage your email reminders here.<p>
+
+  <form action="{{ url_for('add_reminder') }}" method="POST">
+    Email: <input type="text" name="email" size="40">
+    <p>Text: <input type="text" name="text" size="40">
+    <p><input type="submit" value="Add Reminder">
+  </form>
+
+  <a href="{{ url_for('add_some_reminders') }}" class="button">Add some Reminders</a>
+  <p><a href="{{ url_for('delete_all_reminders') }}" class="button">Delete all Reminders</a>
+
+  {% block body %}{% endblock %}
+</div>
